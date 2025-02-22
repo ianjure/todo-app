@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const Todo = require("../models/todo.model");
 
+const getTodos = async (req, res) => {
+    // code here
+};
+
 const createTodo = async (req, res) => {
     // code here
 };
@@ -13,4 +17,4 @@ const deleteTodo = async (req, res) => {
     // code here
 };
 
-module.exports = { createTodo, updateTodo, deleteTodo };
+module.exports = { getTodos, createTodo, updateTodo, deleteTodo };
