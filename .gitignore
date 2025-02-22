@@ -3,5 +3,5 @@ db.txt
 .env
 todo.controller.js
 user.controller.js
-todo.router.js
-user.router.js
+todo.route.js
+user.route.js
