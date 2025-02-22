@@ -1,7 +1,3 @@
 node_modules
 db.txt
 .env
-todo.controller.js
-user.controller.js
-todo.route.js
-user.route.js
