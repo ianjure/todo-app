@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Todo = require("../models/todo.model");
 
 const getTodos = async (req, res) => {
-    const userId = req.params.id; // Extract user ID from params
+    const userId = req.params.id;
 
     if(!mongoose.Types.ObjectId.isValid(userId)) {
         return res.status(404).json({ success: false, message: "User not found." });
