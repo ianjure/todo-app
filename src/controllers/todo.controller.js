@@ -2,12 +2,23 @@ const mongoose = require("mongoose");
 const Todo = require("../models/todo.model");
 
 const getTodos = async (req, res) => {
-    // code here
-;}
+    const userId = req.params.id; // Extract user ID from params
+
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(404).json({ success: false, message: "User not found." });
+    }
+
+    try {
+        const todos = await Todo.find({ user: userId }).sort({ createdAt: -1 }); // Get user's todos, sorted by newest first
+        res.status(200).json({ success: true, data: todos });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
 
 const createTodo = async (req, res) => {
     const { description, status } = req.body;
-    const userId = req.params.userId || req.user?._id; // Extract user ID from params or authenticated user
+    const userId = req.params.id || req.user?._id; // Extract user ID from params or authenticated user
 
     if(!mongoose.Types.ObjectId.isValid(userId)) {
         return res.status(404).json({ success: false, message: "User not found." });
