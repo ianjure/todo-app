@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App with Levels</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="auth-container">
+            <h2>Welcome to Todo App</h2>
+            <div id="auth-form">
+                <input type="email" id="email" placeholder="Email">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="handleAuth()">Login / Sign Up</button>
+            </div>
+        </div>
+
+        <div id="app-container" class="hidden">
+            <header>
+                <h1>Todo App</h1>
+                <div class="user-info">
+                    <span id="user-level">Level: 1</span>
+                    <span id="user-email"></span>
+                    <button onclick="handleLogout()">Logout</button>
+                </div>
+            </header>
+
+            <div class="todo-input">
+                <input type="text" id="todo-input" placeholder="Add a new todo">
+                <button onclick="addTodo()">Add</button>
+            </div>
+
+            <div class="todos-container">
+                <h2>Your Todos</h2>
+                <ul id="todos-list"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
