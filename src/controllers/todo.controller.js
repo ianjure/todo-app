@@ -6,15 +6,27 @@ const getTodos = async (req, res) => {
 ;}
 
 const createTodo = async (req, res) => {
-    const todo = req.body;
+    const { description, status } = req.body;
+    const userId = req.params.userId || req.user?._id; // Extract user ID from params or authenticated user
 
-    if(!todo.description) {
-        return res.status(400).json({ success: false, message: "Please provide all fields." });
+    if(!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(404).json({ success: false, message: "User not found." });
     }
 
-    const newTodo = new Todo(todo);
+    if(!description) {
+        return res.status(400).json({ success: false, message: "Please create a task." });
+    }
+
+    if (!userId) {
+        return res.status(401).json({ success: false, message: "User ID is required." });
+    }
 
     try {
+        const newTodo = new Todo({
+            description: description,
+            status: status,
+            user: userId
+        });
         await newTodo.save();
         res.status(201).json({ success: true, data: newTodo });
     } catch (error) {
