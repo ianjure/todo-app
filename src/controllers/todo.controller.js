@@ -10,9 +10,9 @@ const getTodos = async (req, res) => {
 
     try {
         const todos = await Todo.find({ user: userId }).sort({ createdAt: -1 }); // Get user's todos, sorted by newest first
-        res.status(200).json({ success: true, data: todos });
+        return res.status(200).json({ success: true, data: todos });
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+        return res.status(500).json({ success: false, message: error.message });
     }
 };
 
@@ -39,9 +39,9 @@ const createTodo = async (req, res) => {
             user: userId
         });
         await newTodo.save();
-        res.status(201).json({ success: true, data: newTodo });
+        return res.status(201).json({ success: true, data: newTodo });
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+        return res.status(500).json({ success: false, message: error.message });
     }
 };
 

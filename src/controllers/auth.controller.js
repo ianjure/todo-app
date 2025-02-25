@@ -11,7 +11,7 @@ const registerUser = async (req, res) => {
 
     const existingUser = await User.findOne({ username: username });
     if (existingUser) {
-        res.status(500).json({ success: false, message: "User already exists. Please choose a different username." });
+        return res.status(500).json({ success: false, message: "User already exists. Please choose a different username." });
     } else {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -22,9 +22,9 @@ const registerUser = async (req, res) => {
                 password: hashedPassword
             });
             await newUser.save();
-            res.status(201).json({ success: true, data: newUser });
+            return res.status(201).json({ success: true, data: newUser });
         } catch (error) {
-            res.status(500).json({ success: false, message: error.message });
+            return res.status(500).json({ success: false, message: error.message });
         }
     }
 };
@@ -39,18 +39,18 @@ const loginUser = async (req, res) => {
     try {
         const existingUser = await User.findOne({ username: username });
         if (!existingUser) {
-            res.status(500).json({ success: false, message: "User does not exists." });
+            return res.status(500).json({ success: false, message: "User does not exists." });
         }
 
         const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
         if (!isPasswordMatch) {
-            res.status(500).json({ success: false, message: "You entered the wrong password." });
+            return res.status(500).json({ success: false, message: "You entered the wrong password." });
         }
         else {
-            res.status(201).json({ success: true, message: "Logged-in successfully!" });
+            return res.status(201).json({ success: true, message: "Logged-in successfully!" });
         }
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+        return res.status(500).json({ success: false, message: error.message });
     }
 };
 
