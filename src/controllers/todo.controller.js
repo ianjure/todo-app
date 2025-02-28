@@ -46,7 +46,34 @@ const createTodo = async (req, res) => {
 };
 
 const updateTodo = async (req, res) => {
-    // code here
+    const updateTodo = async (req, res) => {
+        const todoId = req.params.id;
+        const { description, status } = req.body;
+        const userId = req.user?._id; // Get the authenticated user's ID
+    
+        if (!mongoose.Types.ObjectId.isValid(todoId)) {
+            return res.status(404).json({ success: false, message: "Invalid todoId" });
+        }
+    
+        try {
+            // Find the todo by ID and user ID and update it
+            const updatedTodo = await Todo.findOneAndUpdate(
+                { _id: todoId, user: userId }, // Ensure the todo belongs to the authenticated user
+                { description, status },
+                { new: true, runValidators: true } // Return the updated document
+            );
+    
+            if (!updatedTodo) {
+                return res.status(404).json({ success: false, message: "Todo not found" });
+            }
+    
+            res.json({ success: true, data: updatedTodo });
+        } catch (error) {
+            console.error("Error updating todo:", error);
+            res.status(500).json({ success: false, message: "Server error" });
+        }
+    };
+    
 };
 
 const deleteTodo = async (req, res) => {
