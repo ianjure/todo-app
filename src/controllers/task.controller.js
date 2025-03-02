@@ -23,7 +23,7 @@ const getTasks = async (req, res) => {
     }
 
     try {
-        // Find all tasks that belong to the user and sort them by createdAt in descending order
+        // Find all tasks that belong to the user and sort them by created date in descending order
         const tasks = await Task.find({ user: userId }).sort({ createdAt: -1 });
         return res.status(200).json({ success: true, data: tasks });
     } catch (error) {
@@ -32,9 +32,9 @@ const getTasks = async (req, res) => {
 };
 
 const createTask = async (req, res) => {
-    // Get the task and user ID from the request body and parameters
-    const { task } = req.body;
+    // Get the user ID from the authenticated user and the task from the request body
     const userId = req.user.id;
+    const { task } = req.body;
 
     // Check if the user ID is provided
     if (!userId) {
