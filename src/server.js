@@ -1,12 +1,12 @@
 const express = require("express");
 const connectDB = require("./config/db");
-// const userRouter = require("./routes/user.route");
+const userRouter = require("./routes/user.route");
 // const todoRouter = require("./routes/todo.route");
 
 const app = express();
 
 app.use(express.json());
-// app.use("/user", userRouter);
+app.use("/user", userRouter);
 // app.use("/todo", todoRouter);
 
 connectDB((client) => {
