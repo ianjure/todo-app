@@ -8,6 +8,16 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    level: {
+        type: Number,
+        required: true,
+        default: 1
+    },
+    exp: {
+        type: Number,
+        required: true,
+        default: 0
     }
 }, {
     timestamps: true
