@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
 
-const todoSchema = mongoose.Schema({
+const taskSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
     },
-    text: {
+    task: {
         type: String,
         required: true,
-        trim: true,
-        maxlength: 500
+        maxlength: 100
     },
     status: {
         type: String,
@@ -21,6 +20,6 @@ const todoSchema = mongoose.Schema({
     timestamps: true
 });
 
-const Todo = mongoose.model("Todo", todoSchema);
+const Task = mongoose.model("Task", taskSchema);
 
-module.exports = Todo;
+module.exports = Task;
