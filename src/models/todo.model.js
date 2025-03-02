@@ -9,8 +9,13 @@ const todoSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["To Do", "In Progress", "Done", "Priority"],
+        enum: ["To Do", "Priority", "In Progress", "Done"],
         default: "To Do"
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 }, {
     timestamps: true
