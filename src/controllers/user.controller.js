@@ -1,8 +1,15 @@
+// $env:MONGO_URI="mongodb://localhost:27017/todoapp" - for testing
 const mongoose = require("mongoose");
 const User = require("../models/user.model");
+const bcrypt = require("bcrypt");
 
 const getUsers = async (req, res) => {
-    // code here
+    try {
+        const users = await User.find({}, "-password"); // Exclude passwords
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to retrieve users! Please try again!" });
+    }
 };
 
 const createUser = async (req, res) => {
