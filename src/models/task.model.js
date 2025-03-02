@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Define the task schema
 const taskSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -20,6 +21,7 @@ const taskSchema = mongoose.Schema({
     timestamps: true
 });
 
+// Create the Task model
 const Task = mongoose.model("Task", taskSchema);
 
 module.exports = Task;

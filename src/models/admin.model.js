@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Define the Admin schema
 const adminSchema = mongoose.Schema({
     username: {
         type: String,
@@ -13,6 +14,7 @@ const adminSchema = mongoose.Schema({
     timestamps: true
 });
 
+// Create the Admin model
 const Admin = mongoose.model("Admin", adminSchema);
 
 module.exports = Admin;
