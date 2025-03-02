@@ -24,8 +24,8 @@ const getUsers = async (req, res) => {
     }
 
     try {
-        // Find all users and sort them by level and experience points in descending order
-        const users = await User.find().select('-password').sort({ level: -1, exp: -1 });
+        // Find all users and sort them by created date in descending order
+        const users = await User.find().select('-password').sort({ createdAt: -1 });
         return res.status(200).json({ success: true, data: users });
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
@@ -33,7 +33,7 @@ const getUsers = async (req, res) => {
 ;}
 
 const deleteUser = async (req, res) => {
-    // Get the task ID from the request parameters and the admin ID from the authenticated user
+    // Get the user ID from the request parameters and the admin ID from the authenticated user
     const userId = req.params.id;
     const adminId = req.user.id;
 
