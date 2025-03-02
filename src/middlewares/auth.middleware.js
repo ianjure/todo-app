@@ -5,9 +5,9 @@ function authMiddleware(req, res, next) {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
 
-    // Check if the token is null
-    if (token == null) {
-        return res.status(401).json({ success: false, message: "No token found." });
+    // Check if token is provided
+    if (!token) {
+        return res.status(401).json({ success: false, message: "No token provided." });
     }
 
     try {
@@ -20,7 +20,7 @@ function authMiddleware(req, res, next) {
         // Move to the next middleware
         next();
     } catch (error) {
-        return res.status(400).json({ success: false, message: "Invalid token." });
+        return res.status(400).json({ success: false, message: "Invalid or expired token." });
     }
 };
 
