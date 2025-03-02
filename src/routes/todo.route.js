@@ -3,8 +3,8 @@ const { getTodos, createTodo, updateTodo, deleteTodo } = require("../controllers
 
 const router = express.Router();
 
-router.get("/api/:id", getTodos);
-router.post("/api/:id", createTodo);
+router.get("/", getTodos);
+router.post("/api", createTodo);
 router.patch("/api/:id", updateTodo);
 router.delete("/api/:id", deleteTodo);
 
