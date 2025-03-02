@@ -1,24 +1,27 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/user.model");
 
-const authMiddleware = (roles = []) => {
-  return (req, res, next) => {
-    const token = req.header('Authorization');
-    if (!token) return res.status(401).json({ message: 'Access Denied' });
+function authMiddleware(req, res, next) {
+    // Get the token from the header
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+
+    // Check if the token is null
+    if (token == null) {
+        return res.status(401).json({ success: false, message: "No token found." });
+    }
 
     try {
-      const verified = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = verified;
+        // Verify the token
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
 
-      if (roles.length && !roles.includes(req.user.role)) {
-        return res.status(403).json({ message: 'Access Forbidden' });
-      }
+        // Attach the user to the request object
+        req.user = verified;
 
-      next();
-    } catch (err) {
-      res.status(400).json({ message: 'Invalid Token' });
+        // Move to the next middleware
+        next();
+    } catch (error) {
+        return res.status(400).json({ success: false, message: "Invalid token." });
     }
-  };
 };
 
 module.exports = authMiddleware;
