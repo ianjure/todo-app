@@ -17,7 +17,7 @@ app.use("/api/task", taskRouter);
 connectDB((client) => {
     if (client) {
         app.listen(3000, () => {
-            console.log("Server is running on http://localhost:3000");
+            console.log("Server: http://localhost:3000");
         })
     } else {
         console.log("Error connecting to database!");

@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
+const redisClient = require("../config/redisClient");
 
-function authMiddleware(req, res, next) {
+const authMiddleware = async (req, res, next) => {
     // Get the token from the header
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -8,6 +9,12 @@ function authMiddleware(req, res, next) {
     // Check if token is provided
     if (!token) {
         return res.status(401).json({ success: false, message: "No token provided." });
+    }
+
+    // Check if token is blacklisted in Redis
+    const isBlacklisted = await redisClient.get(`blacklist:${token}`);
+    if (isBlacklisted) {
+        return res.status(401).json({ success: false, message: "Token is blacklisted." });
     }
 
     try {
