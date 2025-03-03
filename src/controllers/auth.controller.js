@@ -1,4 +1,6 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const redisClient = require("../config/redisClient");
 const User = require("../models/user.model");
 const Admin = require('../models/admin.model');
 const generateToken = require("../utils/generateToken");
@@ -125,4 +127,29 @@ const loginAdmin = async (req, res) => {
     }
 };
 
-module.exports = { signupUser, loginUser, signupAdmin, loginAdmin };
+const logout = async (req, res) => {
+    // Get the token from the header
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+
+    // Check if token is provided
+    if (!token) {
+        return res.status(401).json({ success: false, message: "No token provided." });
+    }
+
+    try {
+        // Decode the token
+        const decoded = jwt.decode(token);
+
+        // Extract the expiration time from the token
+        const expiryTime = decoded.exp - Math.floor(Date.now() / 1000);
+
+        // Store token in Redis with expiration time
+        await redisClient.setEx(`blacklist:${token}`, expiryTime, "blacklisted");
+        return res.status(200).json({ success: true, message: "Logged-out successfully!" });
+    } catch (error) {
+        return res.status(400).json({ success: false, message: "Invalid or expired token." });
+    }
+};
+
+module.exports = { signupUser, loginUser, signupAdmin, loginAdmin, logout };
