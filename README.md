@@ -1,6 +1,6 @@
 ## 🔥 Raze – Compete. Complete. Dominate.
 
-**Raze** is a **competitive workflow app** that boosts productivity through **global ranking**. Users can create tasks, track progress, and compete for the top spot on the leaderboard. It’s designed to make work more engaging and efficient.
+**Raze** is a **competitive workflow platform** that boosts productivity through **global ranking**. Users can create tasks, track progress, and compete for the top spot on the leaderboard. It’s designed to make work more engaging and efficient.
 
 ***
 
