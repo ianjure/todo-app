@@ -8,7 +8,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "A competitive workflow platform that boost productivity through global ranking.",
+  "description": "A competitive workflow platform that boosts productivity through global ranking.",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
