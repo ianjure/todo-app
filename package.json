@@ -6,7 +6,7 @@
     "dev": "nodemon ./src/server.js"
   },
   "keywords": [],
-  "author": "Ian Jure Macalisang",
+  "author": "",
   "license": "ISC",
   "description": "A competitive workflow app that boosts productivity through global ranking.",
   "dependencies": {
