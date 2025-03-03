@@ -9,7 +9,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-// app.use(express.static('public'));
 app.use('/api/admin', adminRouter);
 app.use("/api/user", userRouter);
 app.use("/api/task", taskRouter);
@@ -17,7 +16,7 @@ app.use("/api/task", taskRouter);
 connectDB((client) => {
     if (client) {
         app.listen(3000, () => {
-            console.log("Server is running on http://localhost:3000");
+            console.log("Server: http://localhost:3000");
         })
     } else {
         console.log("Error connecting to database!");
