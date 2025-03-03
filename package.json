@@ -1,5 +1,5 @@
 {
-  "name": "todo-app",
+  "name": "raze",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "A competitive workflow platform that boost productivity through global ranking.",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
