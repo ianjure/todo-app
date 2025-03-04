@@ -1,17 +1,16 @@
 function calculateExp(level) {
-    // Check if level is less than 1
+    // Ensure level is a positive integer
     if (level < 1) return 0;
 
-    // Constants
-    const maxExp = 100; // Cap EXP per level
-    const minExp = 10; // Minimum EXP gain per task
-    const decayRate = 0.9; // EXP per task decreases by 10% per level
+    const initialExpPerTask = 20; // EXP per task at level 1
+    const minExpPerTask = 5;  // Minimum EXP per task
+    const decayRate = 0.92;   // Adjusted decay rate for a smooth decrease
 
-    // Calculate EXP gain
-    let expGain = maxExp * Math.pow(decayRate, level - 1);
+    // Calculate EXP gain per task
+    let expPerTask = initialExpPerTask * Math.pow(decayRate, level - 1);
 
-    // Return the maximum of the calculated EXP gain and the minimum EXP
-    return Math.max(Math.floor(expGain), minExp);
+    // Ensure EXP per task does not drop below the minimum
+    return Math.max(expPerTask, minExpPerTask);
 }
 
 module.exports = calculateExp;
