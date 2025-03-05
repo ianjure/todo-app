@@ -4,6 +4,9 @@ const path = require("path");
 const router = express.Router();
 
 // User static routes
+router.get("/", (req, res) => {
+    res.redirect("/login");
+});
 router.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "../../public/user/user-signup.html"));
 });
