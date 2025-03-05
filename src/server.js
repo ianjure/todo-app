@@ -9,6 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
+
 app.use('/api/admin', adminRouter);
 app.use("/api/user", userRouter);
 app.use("/api/task", taskRouter);
