@@ -128,7 +128,7 @@ const updateTask = async (req, res) => {
         // Check if the task is already marked as done, then update the task while keeping the status as done
         if (existingTask.status === "Done") {
             status = "Done";
-            const updatedTask = await Task.findOneAndUpdate({ _id: taskId, user: userId }, { task, status }, { new: true, runValidators: true });
+            const updatedTask = await Task.findOneAndUpdate({ _id: taskId, user: userId }, { $set: { task, status } }, { new: true, runValidators: true });
             if (!updatedTask) {
                 return res.status(404).json({ success: false, message: "Invalid user ID." });
             }
@@ -136,7 +136,7 @@ const updateTask = async (req, res) => {
 
         // If the task is not marked as done, update the task with the new status
         } else {
-            const updatedTask = await Task.findOneAndUpdate({ _id: taskId, user: userId }, { task, status }, { new: true, runValidators: true });
+            const updatedTask = await Task.findOneAndUpdate({ _id: taskId, user: userId }, { $set: { task, status } }, { new: true, runValidators: true });
             if (!updatedTask) {
                 return res.status(404).json({ success: false, message: "Invalid user ID." });
             }
