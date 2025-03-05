@@ -7,6 +7,7 @@ const taskRouter = require("./routes/task.route");
 const app = express();
 
 app.use(express.json());
+
 app.use('/api/admin', adminRouter);
 app.use("/api/user", userRouter);
 app.use("/api/task", taskRouter);

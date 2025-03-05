@@ -1,7 +1,5 @@
 const express = require("express");
-
 const authMiddleware = require("../middlewares/auth.middleware");
-
 const { signupUser, loginUser, logout } = require("../controllers/auth.controller");
 const { getLeaderboard, getStatus } = require("../controllers/user.controller");
 

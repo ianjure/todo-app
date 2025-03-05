@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
-
 const Task = require("../models/task.model");
 const User = require("../models/user.model");
-
 const calculateExp = require("../utils/calculateExp");
 const updateLevel = require("../utils/updateLevel");
 

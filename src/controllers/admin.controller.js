@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Admin = require("../models/admin.model");
 const User = require("../models/user.model");
 const Task = require("../models/task.model");

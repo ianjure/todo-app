@@ -1,9 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const User = require("../models/user.model");
 const Admin = require('../models/admin.model');
-
 const redisClient = require("../config/redisClient");
 const generateToken = require("../utils/generateToken");
 
