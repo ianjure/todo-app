@@ -1,45 +1,37 @@
-// To protect routes from unauthorized access
+// Protect routes from unauthorized access
 document.addEventListener("DOMContentLoaded", () => {
-
-    // Get the token, username, and role from the local storage
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
     const role = localStorage.getItem("role");
-
-    // Get the current page
     const currentPage = window.location.pathname;
 
-    // Redirect to login if token, username, or role is missing
+    // If any essential data is missing, redirect to login
     if (!token || !username || !role) {
-        if (currentPage.includes("admin")) {
-            window.location.replace("/admin/login");
-        } else {
-            window.location.replace("/login");
+        const loginPage = currentPage.includes("admin") ? "/admin/login" : "/login";
+        window.location.replace(loginPage);
+        return;
+    }
+
+    // Redirect based on user role
+    if (role === "user") {
+        if (currentPage.startsWith("/admin")) {
+            window.location.replace(`/${username}`); // Prevent users from accessing admin pages
+            return;
         }
-        return;
+        if (currentPage !== `/${username}`) {
+            window.location.replace(`/${username}`); // Ensure users are on their own page
+            return;
+        }
     }
 
-    // Redirect users to their dashboard if they try to access admin pages
-    if (currentPage.startsWith("/admin") && role !== "admin") {
-        window.location.replace(`/${username}`);
-        return;
-    }
-
-    // Redirect admins to their dashboard if they try to access user pages
-    if (!currentPage.startsWith("/admin") && role === "admin") {
-        window.location.replace(`/admin/${username}`);
-        return;
-    }
-
-    // Redirect users to their dashboard if they try to access another user's page
-    if (role === "user" && currentPage !== `/${username}`) {
-        window.location.replace(`/${username}`);
-        return;
-    }
-
-    // Redirect admins to their dashboard if they try to access another admin's page
-    if (role === "admin" && currentPage !== `/admin/${username}`) {
-        window.location.replace(`/admin/${username}`);
-        return;
+    if (role === "admin") {
+        if (!currentPage.startsWith("/admin")) {
+            window.location.replace(`/admin/${username}`); // Prevent admins from accessing user pages
+            return;
+        }
+        if (currentPage !== `/admin/${username}`) {
+            window.location.replace(`/admin/${username}`); // Ensure admins are on their own page
+            return;
+        }
     }
 });
