@@ -19,6 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // Redirect to dashboard if token, username, or role exists
+    if (token || username || role) {
+        if (currentPage.includes("admin")) {
+            window.location.replace(`/admin/${username}`);
+        } else {
+            window.location.replace(`/${username}`);
+        }
+        return;
+    }
+
     // Redirect users to their dashboard if they try to access admin pages
     if (currentPage.startsWith("/admin") && role !== "admin") {
         window.location.replace(`/${username}`);
