@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Ensure the user is on their own dashboard
-    if (currentPage !== `/${username}`) {
+    if (username && currentPage !== `/${username}`) {
         window.location.replace(`/${username}`);
         return;
     }
