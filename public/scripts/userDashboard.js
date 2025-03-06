@@ -1,31 +1,6 @@
 // To display user information as user
 document.addEventListener("DOMContentLoaded", async () => {
-
-    // Get the token, username, and role from local storage
-    const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
-    const role = localStorage.getItem("role");
-
-    // Get the current page
-    const currentPage = window.location.pathname;
-
-    // Redirect to login page if the token, username, or role does not exist
-    if (!token || !username || !role) {
-        window.location.replace("/login");
-        return;
-    }
-
-    // Prevent admins from accessing user dashboard
-    if (role === "admin") {
-        window.location.replace(`/admin/${username}`);
-        return;
-    }
-
-    // Ensure the user is on their own dashboard
-    if (username && currentPage !== `/${username}`) {
-        window.location.replace(`/${username}`);
-        return;
-    }
 
     try {
         // Send a GET request to the server to fetch user data
