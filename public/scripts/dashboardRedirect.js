@@ -5,10 +5,10 @@ function dashboardRedirect() {
       
     // Redirect to dashboard if token, username, or role exists in local storage
     if (token || username || role) {
-        if (role === "user") {
-            window.location.replace(`/${username}`);
-        } else {
+        if (role === "admin") {
             window.location.replace(`/admin/${username}`);
+        } else {
+            window.location.replace(`/${username}`);
         }
         return;
     }
