@@ -3,9 +3,13 @@ function dashboardRedirect() {
     const username = localStorage.getItem("username");
     const role = localStorage.getItem("role");
       
-    // Redirect to dashboard if token, username, or role exists
+    // Redirect to dashboard if token, username, or role exists in local storage
     if (token || username || role) {
-        window.location.replace(`/${username}`);
+        if (role === "user") {
+            window.location.replace(`/${username}`);
+        } else {
+            window.location.replace(`/admin/${username}`);
+        }
         return;
     }
 }
